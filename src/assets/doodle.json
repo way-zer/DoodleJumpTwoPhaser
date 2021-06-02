@@ -1,0 +1,105 @@
+{
+  "file": "doodle.png",
+  "frames": {
+    "platform_normal": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 105,
+        "h": 31
+      }
+    },
+    "platform_break": {
+      "frame": {
+        "x": 0,
+        "y": 31,
+        "w": 105,
+        "h": 31
+      }
+    },
+    "platform_move": {
+      "frame": {
+        "x": 0,
+        "y": 61,
+        "w": 105,
+        "h": 31
+      }
+    },
+    "platform_once": {
+      "frame": {
+        "x": 0,
+        "y": 90,
+        "w": 105,
+        "h": 31
+      }
+    },
+    "char_right": {
+      "frame": {
+        "x": 0,
+        "y": 121,
+        "w": 110,
+        "h": 80
+      }
+    },
+    "char_left": {
+      "frame": {
+        "x": 0,
+        "y": 201,
+        "w": 110,
+        "h": 80
+      }
+    },
+    "char_right_land": {
+      "frame": {
+        "x": 0,
+        "y": 289,
+        "w": 110,
+        "h": 80
+      }
+    },
+    "char_left_land": {
+      "frame": {
+        "x": 0,
+        "y": 371,
+        "w": 110,
+        "h": 80
+      }
+    },
+    "spring0": {
+      "frame": {
+        "x": 0,
+        "y": 445,
+        "w": 45,
+        "h": 53
+      }
+    },
+    "spring1": {
+      "frame": {
+        "x": 0,
+        "y": 501,
+        "w": 45,
+        "h": 53
+      }
+    },
+    "platform_break_broken": {
+      "frame": {
+        "x": 0,
+        "y": 554,
+        "w": 105,
+        "h": 60,
+        "offX": 0,
+        "offY": 0,
+        "sourceW": 105,
+        "sourceH": 60
+      }
+    },
+    "platform_base": {
+      "frame": {
+        "x": 0,
+        "y": 614,
+        "w": 100,
+        "h": 5
+      }
+    }
+  }
+}
