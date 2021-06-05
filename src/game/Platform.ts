@@ -54,7 +54,7 @@ export class Platform extends Phaser.GameObjects.TileSprite {
             this.body.allowGravity = true
             this.body.setVelocityY(300)
         }
-        if (this.scene.world.conv2Height(this.y) < this.scene.world.y || (this.type == 'once' && this.broken))
+        if (this.scene.world.conv2Height(this.y) < this.scene.world.worldHeight(0) || (this.type == 'once' && this.broken))
             this.scene.world.remove(this)
     }
 

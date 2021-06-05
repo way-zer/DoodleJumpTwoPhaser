@@ -2,6 +2,7 @@ import {io, Socket} from 'socket.io-client'
 import {EventKey, MyEventEmitter} from '../utils/Event'
 import {Main} from './Main'
 import {C2SEvents, S2CEvents, UserInfo} from '../event'
+import {Game} from './Game'
 
 export type Player = UserInfo
 
@@ -31,7 +32,7 @@ export class NetworkMgr extends MyEventEmitter<{ sender: Player }> {
             start()
             this.state = 'gaming'
         })
-        await this.client.emit('joinRoom')
+        await this.client.emit('joinRoom',{display: Game.displayMode})
     }
 
     async disconnect() {

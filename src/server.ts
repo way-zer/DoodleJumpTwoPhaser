@@ -10,6 +10,9 @@ const io = new Server<C2SEvents, S2CEvents>({
 
 interface SocketExt {
     info: UserInfo
+    serverInfo: {
+        isDisplay: boolean
+    }
 }
 
 type MySocket = Socket<C2SEvents, S2CEvents> & SocketExt
@@ -38,8 +41,10 @@ class Room<T extends MySocket = MySocket> {
         })
         client.join(this.name)
         this.sockets.push(client)
-        client.info.master = this.sockets.length == 1
+        client.info.master = !client.serverInfo.isDisplay&&!this.sockets.some(it=>it.info.master)
         client.emit('infoUpdate', client.info)
+        if(client.info.master)
+            console.log("master is "+ client.info.id)
         client.in(this.name).emit('joinRoom', {from: client.info})
     }
 
@@ -47,9 +52,12 @@ class Room<T extends MySocket = MySocket> {
         client.to(this.name).emit('levelRoom', {from: client.info})
         this.sockets = this.sockets.filter(it => it != client)
         if (client.info.master && this.sockets.length) {
-            const newMaster = this.sockets[0]
-            newMaster.info.master = true
-            newMaster.emit('infoUpdate', newMaster.info)
+            const newMaster = this.sockets.find(it=>!it.serverInfo.isDisplay)
+            if(newMaster){
+                newMaster.info.master = true
+                newMaster.emit('infoUpdate', newMaster.info)
+                console.log("master is "+ newMaster.info.id)
+            }
         }
         if (this.sockets.length === 0) {
             Room.rooms.delete(this.name)
@@ -59,8 +67,10 @@ class Room<T extends MySocket = MySocket> {
 
 const testRoom = 'test'
 io.on('connection', (client) => {
-    (client as MySocket).info = {id: client.id, master: false}
-    client.on('joinRoom', () => {
+    (client as MySocket).info = {id: client.id, master: false};
+    (client as MySocket).serverInfo = {isDisplay: false};
+    client.on('joinRoom', ({display}) => {
+        (client as MySocket).serverInfo.isDisplay = display
         const room = Room.get(testRoom)
         room.join(client as MySocket)
     })

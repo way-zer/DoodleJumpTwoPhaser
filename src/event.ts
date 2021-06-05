@@ -7,7 +7,7 @@ type CustomEvent = { id: number, data: any }
 type F<T = {}> = (obj: T) => void
 
 export interface C2SEvents {
-    joinRoom: () => void
+    joinRoom: F<{display:boolean}>
     broadcast: F<{ peer?: UserInfo, data: CustomEvent }>
 }
 

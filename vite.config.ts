@@ -10,7 +10,7 @@ export default defineConfig(({mode}) => {
             ],
         },
         build: {
-            outDir: server ? 'dist/server' : 'dist/client',
+            // outDir: server ? 'dist/server' : 'dist/client',
             lib: server ? {
                 entry: 'src/server.ts',
                 name: 'server',
@@ -19,8 +19,8 @@ export default defineConfig(({mode}) => {
             } : undefined,
             sourcemap: server,
             rollupOptions: {
-                external: server?/node_modules\/.*/:undefined
-            }
+                external: server ? /node_modules\/.*/ : undefined,
+            },
         },
         server: {
             port: 8082,

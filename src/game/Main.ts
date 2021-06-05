@@ -4,7 +4,7 @@ import doodlePng from '@/assets/doodle.png?url'
 // @ts-ignore
 import doodleJson from '@/assets/doodle.json'
 import {NetworkMgr} from './NetworkMgr'
-import {BG, TheWorld} from './TheWorld'
+import {TheWorld} from './TheWorld'
 import {ControlMgr} from './ControlMgr'
 import {Player} from './Player'
 import {Platform} from './Platform'
@@ -37,11 +37,9 @@ export class Main extends Phaser.Scene {
         this.width = +this.game.canvas.width
 
         this.control = new ControlMgr(this)
-        const bg = new BG(this)
-        this.add.existing(bg)
         this.platforms = this.physics.add.group()
         this.players = this.physics.add.group()
-        this.world = new TheWorld(this, bg, this.platforms, this.players)
+        this.world = new TheWorld(this, this.platforms, this.players)
         this.add.existing(this.world)
         this.theUI = new TheUI(this)
         // this.add.existing(this.theUI)
@@ -50,8 +48,8 @@ export class Main extends Phaser.Scene {
         this.physics.add.collider(this.players, this.platforms, (player, other) => {
             (player as Player).onPlatform(other as Platform)
         })
-        this.physics.world.createDebugGraphic()
-        this.players.world.drawDebug = true
+        // this.physics.world.createDebugGraphic()
+        // this.players.world.drawDebug = true
         //     this.addChild(TheUI)
     }
 

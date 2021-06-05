@@ -26,7 +26,7 @@ async function watchMainProcess() {
 
 function startServer() {
     serverProcess = spawn('node', [
-        path.join(root, 'dist/server/server.es.js'),
+        path.join(root, 'dist/server.es.js'),
     ],{
         stdio: 'inherit'
     })

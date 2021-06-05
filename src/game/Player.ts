@@ -2,6 +2,7 @@ import {Platform} from './Platform'
 import {EventKey} from '../utils/Event'
 import {Main} from './Main'
 import Vector2 = Phaser.Math.Vector2
+import {Game} from './Game'
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
     declare body: Phaser.Physics.Arcade.Body
@@ -53,6 +54,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     sendSync() {
+        if(Game.displayMode&&this.local)return
         const {x, y} = this
         this.scene.network.send(Player.event_sync, {x, y, velocity: this.body.velocity}, true)
     }

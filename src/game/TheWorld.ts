@@ -22,8 +22,12 @@ export class BG extends TileSprite {
 }
 
 export class TheWorld extends Container {
-    constructor(public scene: Main, private bg: BG, private platforms: Group, private players: Phaser.Physics.Arcade.Group) {
+    bg: BG
+    constructor(public scene: Main,private platforms: Group, private players: Phaser.Physics.Arcade.Group) {
         super(scene)
+        this.bg = new BG(scene)
+        scene.add.existing(this.bg)
+
         this.height = scene.height
         this.width = scene.width
         this.y = 0
@@ -32,6 +36,14 @@ export class TheWorld extends Container {
     move(delta: number) {
         this.y += delta
         this.bg.move(delta)
+    }
+
+    /**
+     * 获取世界的相对位置点
+     * @param point 0-1的位置,0代表底部,1代表顶部
+     */
+    worldHeight(point: number){
+        return this.y + this.height*point
     }
 
     place(platform: Platform, y: number, clampedX: number = (Math.random())) {
